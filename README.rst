@@ -19,18 +19,15 @@ Usage
 
 .. code-block:: python
 
-    from tornado.web import Application, RequestHandler
     from tornado.ioloop import IOLoop
 
-    from tornado_prometheus import PrometheusMixIn, MetricsHandler
+    from tornado_prometheus import PrometheusMixInApplication
 
-    class SampleApp(PrometheusMixIn, Application):
+    class SampleApp(PrometheusMixInApplication):
         pass
 
     if __name__ == '__main__':
-      app =  SampleApp([
-          (r"/metrics", MetricsHandler),
-      ])
+      app =  SampleApp([])
 
       app.listen(8888)
       IOLoop.current().start()

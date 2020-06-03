@@ -1,10 +1,10 @@
-from tornado.web import Application, RequestHandler
+from tornado.web import RequestHandler
 from tornado.testing import AsyncHTTPTestCase
 
-from tornado_prometheus import PrometheusMixIn, MetricsHandler
+from tornado_prometheus import PrometheusMixInApplication
 
 
-class SampleApp(PrometheusMixIn, Application):
+class SampleApp(PrometheusMixInApplication):
     pass
 
 
@@ -15,7 +15,7 @@ class MainHandler(RequestHandler):
 
 class TestIntegration(AsyncHTTPTestCase):
     def get_app(self):
-        return SampleApp([(r"/", MainHandler), (r"/metrics", MetricsHandler)])
+        return SampleApp([(r"/", MainHandler)])
 
     def test_integration(self):
         self.fetch("/")
